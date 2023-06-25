@@ -13,7 +13,7 @@ OBJS_SUBDIR := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS_SUBDIR))
 OBJS_SUBDIR2 := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS_SUBDIR2))
 
 CC := cc
-CFLAGS := -Wall -g -fsanitize=address
+CFLAGS := -Wall #-g -fsanitize=address
 LIBFT = libft/
 
 all: libft $(NAME)

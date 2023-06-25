@@ -137,6 +137,7 @@ void		execute(t_cmd *cmd);
 /*exec_utils.c*/
 int			contain_char(char *s, char c);
 char		*get_path(char *cmd);
+char		*get_path2(char *cmd);
 void		free_cmd(t_cmd *cmd);
 int			is_builtin(char *cmd);
 void		exec_builtin(t_cmd *cmd);

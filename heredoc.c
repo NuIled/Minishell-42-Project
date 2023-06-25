@@ -124,7 +124,6 @@ char *heredoc(char **del,t_cmd *cmd,char *s)
 	char *joined =NULL;
 
 	i = 0;
-	printf("%s\n",*del);
 	exp = xpnd(del);
 	while(del[i])
 	{

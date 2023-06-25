@@ -82,6 +82,7 @@ void x_cmd(t_cmd *cmd)
     }
     env_arr = lst_to_arr_env(g_vars->env);
     path = get_path(cmd->argv[0]);
+    update_last_cmd(path);
     if(!path)
         path = cmd->argv[0];
     execve(path,cmd->argv,env_arr);
@@ -220,8 +221,7 @@ void execute(t_cmd *cmd)
             cmd = cmd->next;    
     }
     exc_wait(cmd,n);
-    if(cmd->argv[0])
-        update_last_cmd(get_path(cmd->argv[0]));
+    update_last_cmd(get_path(cmd->argv[0]));
     free_cmd_list(cmd);
     dupping();
 }

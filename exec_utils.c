@@ -43,6 +43,36 @@ char *get_path(char *cmd)
     free_2d_arr(paths);
     return (cmd);
 }
+char *get_path2(char *cmd)
+{
+    char **paths;
+    int i;
+    char *envPath;
+    char *tmp;
+    
+    i = 0;
+    if(contain_char(cmd,'/'))
+        return(ft_strdup(cmd));
+    envPath = get_env_value("PATH"); 
+    if(!envPath)
+        return (NULL);
+    paths = ft_split(envPath,':');
+    if(!paths)
+        return (NULL);
+    while(paths[i])
+    {
+        tmp = str_char_str(paths[i],cmd,'/');
+        if(!access(tmp, X_OK))//0 is good
+        {
+            free_2d_arr(paths);
+            return (tmp);
+        }
+        free(tmp);
+        i++;
+    } 
+    free_2d_arr(paths);
+    return (NULL);
+}
 
 void	 free_cmd(t_cmd *cmd)
 {
@@ -103,6 +133,10 @@ void exec_builtin(t_cmd *cmd)
 
 void update_last_cmd(char *last_cmd)
 {
+    if(!access(last_cmd, X_OK))
+    {
     remove_env_node("_");
     add_to_env("_",last_cmd);
+    free(last_cmd);
+    }
 }

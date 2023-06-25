@@ -25,6 +25,7 @@ void	free_2d_arr(char **arr)
 		i++;
 	}
 	free (arr);
+	arr = NULL;
 }
 
 t_env	*create_node(char *var, char *value)
