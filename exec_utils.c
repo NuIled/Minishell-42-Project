@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int contain_char(char *s,char c)
+int     contain_char(char *s,char c)
 {
     if(!s)
         return (0);
@@ -13,7 +13,7 @@ int contain_char(char *s,char c)
     return (0);
 }
 
-char *get_path(char *cmd)//if cmd exist it return it if not return NULL
+char *get_path(char *cmd)
 {
     char **paths;
     int i;

@@ -1,5 +1,8 @@
 #include "minishell.h"
-int cmd_list_size(t_cmd *head)
+
+
+
+int     cmd_list_size(t_cmd *head)
 {
     int i = 0;
 

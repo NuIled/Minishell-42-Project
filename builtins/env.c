@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/25 19:44:30 by srachdi           #+#    #+#             */
+/*   Updated: 2023/06/25 19:45:42 by srachdi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void env(void)
+void	env(void)
 {
-    t_env *head;
+	t_env	*head;
 
-    head = g_vars->env;
-    while(head)
-    {
-        printf("%s=%s\n",head->var,head->value);
-        head = head->next;
-    }
-    g_vars->status = 0;
+	head = g_vars->env;
+	while (head)
+	{
+		printf ("%s=%s\n", head->var, head->value);
+		head = head->next;
+	}
+	g_vars->status = 0;
 }
