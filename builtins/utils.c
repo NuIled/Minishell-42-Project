@@ -25,6 +25,7 @@ void	update_env(char *var, char *new_value)
 		{
 			free (head->value);
 			head->value = ft_strdup(new_value);
+			free(new_value);
 		}
 		head = head->next;
 	}

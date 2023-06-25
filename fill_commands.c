@@ -31,18 +31,17 @@ void	without_quotes_args(t_cmd *cmd)
 void	fill_command(char *s, t_cmd *command)
 {
 	char	*expanded;
-	char	*args;
 	char	*tmp;
 	int		err1;
 	int		err2;
 
-	args = NULL;
 	tmp = skip_space(ft_strdup(s));
 	free (s);
 	err1 = redir_input(tmp, command, tmp, 0);
 	err2 = redir_output(tmp, command, NULL, 0);
 	tmp = remove_brackets(tmp);
 	expanded = expand(tmp);
+	//expanded = tmp;
 	if ((err1 == -1 && err2 == -1) || err1 == -2)
 	{
 		fill_err(command);

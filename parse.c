@@ -41,6 +41,6 @@ void	parse(char *line)
 	command = line_to_cmd(line);
 	if (!command)
 		ft_putstr_fd("malloc failed in parse()\n", STDERR_FILENO);
-	else
-		execute(command);
+	//else
+		//execute(command);
 }

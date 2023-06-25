@@ -59,7 +59,7 @@ char **split_tokens(char *line,char c)
 	if(!line)
 		return NULL;
 	count = count_words(line,c);
-	arr = ft_calloc(count +1,sizeof(char *));
+	arr = ft_calloc(count + 1,sizeof(char *));
 	if(!arr)
 		return NULL;
 	while(++i < count)
@@ -83,6 +83,7 @@ void tokenize(char *line , t_cmd *command)
 
 	i = 0;
 	arr = split_tokens(line,'|');
+	free(line);
 	if(!arr)
 		init_command(command),command->argv = malloc(1),command->argv = NULL;
 	while(arr[i])

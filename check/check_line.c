@@ -74,6 +74,7 @@ int check_line(char *line)
 		ft_putstr_fd("minishell : syntax error\n",STDERR_FILENO);
 		return (0);
 	}
+	free(s);
 	free_array(arr);
 	free_tkn_list(lst);
 	return (1);

@@ -86,18 +86,17 @@ char **split_line_to_args(char *line)
 
 	count = count_args(line);
 	args = malloc(sizeof(char *) * (count + 1));
-
 	if (!args)
 		return NULL;
-
 	while (line[i])
 	{
 		args[j] = get_arg(line + i, &i);
 		if (!args[j])
-			return free_2d_arr(args), NULL;
+			return (free_2d_arr(args), NULL);
 
 		j++;
 	}
 	args[j] = NULL;
+	free(line);
 	return args;
 }
