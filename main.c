@@ -72,7 +72,7 @@ void	minishell(void)
 	i = 0;
 	while (1)
 	{
-		line = readline ("minishell>");
+		line = readline ("\033[1m\033[36mminishell$ \033[0m");
 		if (!line)
 			end_it ();
 		add_to_history (line);

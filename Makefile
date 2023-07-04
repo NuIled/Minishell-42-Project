@@ -4,8 +4,13 @@ CC := cc
 CFLAGS := -Wall #-Wextra -Werror #-g -fsanitize=address
 LIBFT := libft/
 INC := minishell.h check/check.h
-SRCS := main.c env.c exec_utils.c execute.c expand.c expand_utils.c fill_command_utils.c fill_commands.c heredoc.c parse.c parse_utils.c redirect_input.c redirect_output.c redirection.c remove_brackets.c signals.c split_args.c tokenize.c utils.c utils_2.c
-SRCS += builtins/cd.c builtins/env.c builtins/export_utils.c builtins/pwd.c builtins/utils.c builtins/echo.c builtins/export.c builtins/ft_exit.c builtins/unset.c
+SRCS := main.c env.c exec_utils.c execute.c expand.c expand_utils.c\
+	fill_command_utils.c fill_commands.c heredoc.c\
+	parse.c parse_utils.c redirect_input.c redirect_output.c\
+	redirection.c remove_brackets.c signals.c\
+	split_args.c tokenize.c utils.c utils_2.c
+SRCS += builtins/cd.c builtins/env.c builtins/export_utils.c builtins/pwd.c\
+	builtins/utils.c builtins/echo.c builtins/export.c builtins/ft_exit.c builtins/unset.c
 SRCS += check/check_line.c check/check_tkns.c check/split_it.c check/tkn_it.c
 OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 RED		=	\033[31m

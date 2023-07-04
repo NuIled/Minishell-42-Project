@@ -52,7 +52,6 @@ typedef struct s_shell {
 	int				out;
 	int				err;
 	int				status;
-	char			*entry;
 	int				pid_count;
 	int				*pids;
 	t_env			*env;

@@ -73,8 +73,8 @@ void x_cmd(t_cmd *cmd)
 {
     char **env_arr;
     char *path;
-    if(!cmd->argv[0])
-        return;
+    if(!cmd->argv || !cmd->argv[0])
+        exit(0);
     if(is_builtin(cmd->argv[0]))
     {
         exec_builtin(cmd);
@@ -100,7 +100,7 @@ void x_cmd(t_cmd *cmd)
 pid_t exc_one(t_cmd *command,int i)
 {
     pid_t id;
-    if(!i && is_builtin(command->argv[0]))
+    if(i == 0 && is_builtin(command->argv[0]))
     {
         exc_dup(command);
         exec_builtin(command);
@@ -220,8 +220,8 @@ void execute(t_cmd *cmd)
         if(cmd->next)
             cmd = cmd->next;    
     }
-    exc_wait(cmd,n);
     update_last_cmd(get_path(cmd->argv[0]));
+    exc_wait(cmd,n);
     free_cmd_list(head);
     dupping();
 }

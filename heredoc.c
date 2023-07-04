@@ -69,43 +69,6 @@ int is_heredoc(char *s,char ***hd,int *i,char **delimiter)
 	}
 	return 0;
 }
-// void bool_heredoc(char **del,int i,int *q,char **tmp)
-// {
-//     if(!del[i]&& !*tmp)
-//         *tmp = ft_strdup("");
-//     if(!del[i])
-//         *q = quote_heredoc(del[i]);
-//     else
-//         *q = 0; 
-// }
-
-// char *expand_heredoc(char *s,char *prev,int in_q)
-// {
-//     char *tmp1;
-//     char *tmp2;
-//     char *str;
-
-//     tmp1= NULL;
-//     tmp2 =NULL;
-//     str =NULL;
-//     if(!in_q)
-//     {
-//         tmp2 = expand(s);
-//         tmp1 = ft_strjoin(tmp2,"\n");
-//     }
-//     else
-//         tmp1 = ft_strjoin(s,"\n");
-//     if(prev)
-//         str = ft_strjoin(prev,tmp1);
-//     else 
-//         str = ft_strdup(tmp1);
-//     free(tmp1);
-//     if(tmp2)
-//         free(tmp2);
-//     if(prev)
-//         free(prev);
-//     return str;
-// }
 
 int xpnd(char **del)
 {
@@ -129,7 +92,7 @@ char *heredoc(char **del,t_cmd *cmd,char *s)
 	exp = xpnd(del);
 	while(del[i])
 	{
-		line = readline("> ");
+		line = readline("\033[1;35m>\033[0m ");
 		if(!line)
 			break;
 		if(exp && *line)
