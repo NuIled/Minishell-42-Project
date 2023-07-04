@@ -205,11 +205,13 @@ void exc_wait(t_cmd *cmd, int n)
 
 void execute(t_cmd *cmd)
 {
-    int i,n;
-    t_cmd *head;
-    head = cmd;
+    int     i;
+    int     n;
+    t_cmd   *head;
+
     i = -1;
     n = cmd_list_size(cmd);
+    head = cmd;
     g_vars->pids = ft_calloc(n , sizeof(int));
     if(!cmd || !n || !g_vars->pids)
         return;

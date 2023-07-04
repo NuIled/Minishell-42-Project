@@ -25,7 +25,7 @@ int redir_input(char *s,t_cmd *command , char *tmp,int mode)
 			close(hd->is_open);
 		if(s[hd->i] == '<' && !var_quotes(s, hd->i, 0))
 		{
-			if(is_heredoc(tmp, &hd->heredoc, &hd->i, &hd->path))
+			if(is_heredoc(tmp, &hd->heredoc, &hd->i))
 				err = set_stdin(hd->heredoc,command,hd->path,mode);
 			else
 			{

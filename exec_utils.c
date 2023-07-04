@@ -128,12 +128,11 @@ void exec_builtin(t_cmd *cmd)
         env();
     else if(!ft_strcmp(cmd->argv[0],"exit"))
         ft_exit(cmd);
-    update_last_cmd(cmd->argv[0]);
 }
 
 void update_last_cmd(char *last_cmd)
 {
-    if(*last_cmd && !access(last_cmd, X_OK))
+    if(last_cmd && *last_cmd && !access(last_cmd, X_OK))
     {
         remove_env_node("_");
         add_to_env("_",last_cmd);

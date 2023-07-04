@@ -17,6 +17,7 @@ void	env(void)
 	t_env	*head;
 
 	head = g_vars->env;
+	update_last_cmd(get_path("env"));
 	while (head)
 	{
 		printf ("%s=%s\n", head->var, head->value);

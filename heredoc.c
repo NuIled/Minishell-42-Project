@@ -57,10 +57,8 @@ t_heredoc *init_h(void)
 	return hd;
 }
 
-int is_heredoc(char *s,char ***hd,int *i,char **delimiter)
+int is_heredoc(char *s,char ***hd,int *i)
 {
-	// if(*delimiter)
-	//free(*delimiter),*delimiter = NULL;
 	if(s[*i + 1] && s[*i + 1] == '<')
 	{
 		*hd = get_delimiter(word_after_redir(s, *i + 1, 1));
@@ -80,7 +78,7 @@ int xpnd(char **del)
 	return (1);
 }
 
-char *heredoc(char **del,t_cmd *cmd,char *s)
+char *heredoc(char **del,t_cmd *cmd)
 {
 	int i;
 	int exp;

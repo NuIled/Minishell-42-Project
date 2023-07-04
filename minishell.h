@@ -14,6 +14,7 @@
 # define MINISHELL_H
 # include "libft/libft.h"
 # include <stdio.h>
+# include <sys/types.h>
 # include <fcntl.h>
 # include <errno.h>
 # include <stdlib.h>
@@ -164,8 +165,8 @@ void		fill_command(char *s, t_cmd *command);
 char		*word_after_redir(char *s, int i, int rd );
 char		**get_delimiter(char *delimiter);
 t_heredoc	*init_h(void);
-int			is_heredoc(char *s, char ***hd, int *i, char **delimiter);
-char		*heredoc(char **del, t_cmd *cmd, char *s);
+int			is_heredoc(char *s, char ***hd, int *i);
+char		*heredoc(char **del, t_cmd *cmd);
 /*parse_utils.c*/
 int			squotes(char *line, int i);
 int			dquotes(char *line, int i);

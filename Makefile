@@ -1,7 +1,7 @@
 NAME := minishell
 OBJ_DIR := obj
 CC := cc
-CFLAGS := -Wall  #-Wextra -Werror #-g -fsanitize=address
+CFLAGS := -Wall -Werror -Wextra #-fsanitize=address
 LIBFT := libft/
 INC := minishell.h check/check.h
 SRCS := main.c env.c exec_utils.c execute.c expand.c expand_utils.c\

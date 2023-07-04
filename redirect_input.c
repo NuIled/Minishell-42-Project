@@ -29,7 +29,7 @@ int set_stdin(char **dlmtr,t_cmd *cmd,char *path,int n)
 
 	if(dlmtr && !path)
 	{
-		tmp = heredoc(dlmtr,cmd,NULL);
+		tmp = heredoc(dlmtr,cmd);
 		if(!tmp)
 			return -2;
 		cmd->in = tmp; 

@@ -22,7 +22,7 @@ static void	my_error(char *command, char *errmsg)
 	g_vars->status = 1;
 }
 
-char	*home(void)
+static char	*home(void)
 {
 	char	*home;
 
@@ -36,7 +36,7 @@ char	*home(void)
 	return (ft_strdup(home));
 }
 
-char *oldpwd(void)
+static char *oldpwd(void)
 {
 	char	*oldpwd;
 
@@ -50,7 +50,7 @@ char *oldpwd(void)
 	return (ft_strdup(oldpwd));
 }
 
-void cd_update_env(char *var, char *value)
+static void cd_update_env(char *var, char *value)
 {
 	if(get_env_value(var))
 		update_env(var, value);
