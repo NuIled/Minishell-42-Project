@@ -133,10 +133,10 @@ void exec_builtin(t_cmd *cmd)
 
 void update_last_cmd(char *last_cmd)
 {
-    if(!access(last_cmd, X_OK))
+    if(*last_cmd && !access(last_cmd, X_OK))
     {
-    remove_env_node("_");
-    add_to_env("_",last_cmd);
-    free(last_cmd);
+        remove_env_node("_");
+        add_to_env("_",last_cmd);
+        free(last_cmd);
     }
 }

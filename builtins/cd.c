@@ -19,9 +19,10 @@ static void	my_error(char *command, char *errmsg)
 	ft_putstr_fd(" : ", STDERR_FILENO);
 	ft_putstr_fd(errmsg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
+	g_vars->status = 1;
 }
 
-void	home(void)
+char	*home(void)
 {
 	char	*home;
 
@@ -29,44 +30,60 @@ void	home(void)
 	if (!home)
 	{
 		my_error("cd", "Home not set");
-		g_vars->status = 1;
-		return ;
+		return (NULL);
 	}
 	chdir(home);
+	return (ft_strdup(home));
+}
+
+char *oldpwd(void)
+{
+	char	*oldpwd;
+
+	oldpwd = get_env_value("OLDPWD");
+	if (!oldpwd)
+	{
+		my_error("cd", "OLDPWD not set");
+		return (NULL);
+	}
+	chdir(oldpwd);
+	return (ft_strdup(oldpwd));
+}
+
+void cd_update_env(char *var, char *value)
+{
+	if(get_env_value(var))
+		update_env(var, value);
+	else
+	{
+		add_to_env(var, value);
+		free(value);
+	}
 }
 
 void	cd(t_cmd *cmd)
 {
 	char	*path;
-	char	pwd[4096 + 1];
+	char	*pwd;
 
-	getcwd(pwd, 4096);
-	if (!cmd->argv[1])
-	{
-		path = get_env_value("HOME");
-		home();
-	}
-	else if (!ft_strcmp(cmd->argv[1], "~"))
-	{
-		path = get_env_value("HOME");
-		home();
-	}
+	pwd = getcwd(NULL, 0);
+	if (!cmd->argv[1] || !ft_strcmp(cmd->argv[1], "~") \
+	|| !ft_strcmp(cmd->argv[1], "--"))
+		path = home();
 	else if (!ft_strcmp(cmd->argv[1], "-"))
-	{
-		path = get_env_value("OLDPWD");
-		chdir(path);
-	}
+		path = oldpwd();
 	else
 	{
-		if (chdir(cmd->argv[1]) != 0)
+		if (chdir(cmd->argv[1]))
 		{
 			my_error("cd", "No such file or directory");
-			g_vars->status = 1;
 			return ;
 		}
-		path = cmd->argv[1];
+		path = ft_strdup(cmd->argv[1]);
 	}
+	if(!path)
+		return ;
 	g_vars->status = 0;
-	update_env("PWD", path);
-	update_env("OLDPWD", pwd);
+	cd_update_env("PWD", path);
+	cd_update_env("OLDPWD", pwd);
 }

@@ -82,16 +82,15 @@ void x_cmd(t_cmd *cmd)
     }
     env_arr = lst_to_arr_env(g_vars->env);
     path = get_path(cmd->argv[0]);
-    update_last_cmd(path);
-    if(!path)
-        path = cmd->argv[0];
+    // if(!path)
+    //     path = cmd->argv[0];
     execve(path,cmd->argv,env_arr);
     if(errno != 14 || ft_strchr(cmd->argv[0],'/'))
         exc_err(cmd->argv[0],strerror(errno));
     else
         exc_err(cmd->argv[0],"command not found");
-    free(path);
-    free_array(env_arr);
+    //free(path);
+    //free_array(env_arr);
     if(errno == 2 || errno == EACCES)
         exit((errno == 2) * 127 + (errno == EACCES) * 126);
     exit (1);
@@ -220,8 +219,8 @@ void execute(t_cmd *cmd)
         if(cmd->next)
             cmd = cmd->next;    
     }
-    update_last_cmd(get_path(cmd->argv[0]));
     exc_wait(cmd,n);
+    update_last_cmd(get_path(cmd->argv[0]));
     free_cmd_list(head);
     dupping();
 }
