@@ -73,23 +73,23 @@ SRCS_BONUS = ./ft_lstnew.c \
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 .c.o : $(SRCS) $(INCLUDES)
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
 
 clean :
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re : fclean all
 
 
 bonus : $(OBJS_BONUS)
-	$(AR) $(ARFLAGS) $(NAME) $^
+	@$(AR) $(ARFLAGS) $(NAME) $^
 
 .PHONY:all clean fclean re bonus

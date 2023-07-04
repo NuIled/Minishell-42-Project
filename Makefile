@@ -1,44 +1,46 @@
-NAME = minishell
-
+NAME := minishell
 OBJ_DIR := obj
-
-SRCS := $(wildcard *.c)
-SRCS_SUBDIR := $(wildcard builtins/*.c)
-SRCS_SUBDIR2 := $(wildcard check/*.c)
-
-OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
-
-OBJS_SUBDIR := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS_SUBDIR))
-
-OBJS_SUBDIR2 := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS_SUBDIR2))
-
 CC := cc
-CFLAGS := -Wall #-g -fsanitize=address
-LIBFT = libft/
+CFLAGS := -Wall #-Wextra -Werror #-g -fsanitize=address
+LIBFT := libft/
+INC := minishell.h check/check.h
+SRCS := main.c env.c exec_utils.c execute.c expand.c expand_utils.c fill_command_utils.c fill_commands.c heredoc.c parse.c parse_utils.c redirect_input.c redirect_output.c redirection.c remove_brackets.c signals.c split_args.c tokenize.c utils.c utils_2.c
+SRCS += builtins/cd.c builtins/env.c builtins/export_utils.c builtins/pwd.c builtins/utils.c builtins/echo.c builtins/export.c builtins/ft_exit.c builtins/unset.c
+SRCS += check/check_line.c check/check_tkns.c check/split_it.c check/tkn_it.c
+OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+RED		=	\033[31m
+GREEN	=	\033[32m
+BLUE	=	\033[34m
+PINK	=	\033[35m
+WHITE	=	\033[37m
+BOLD	=	\033[1m
+RESET	=	\033[0m
+$(NAME): libft/libft.a $(OBJS)
+	@echo "$(GREEN) $(BOLD) making $(NAME) ... $(RESET)"
+	@$(CC) $(CFLAGS) -Llibft -lft -lreadline $^ -o $@
+	@echo "$(PINK) $(BOLD) $(NAME) is ready $(RESET)"
 
-all: libft $(NAME)
+$(OBJ_DIR)/%.o: %.c $(INC)
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-libft :
-	make all -sC $(LIBFT)
+libft/libft.a:
+	@echo "$(WHITE) $(BOLD) making libft ... $(RESET)"
+	@$(MAKE) -C $(LIBFT)
 
-$(NAME): $(OBJS) $(OBJS_SUBDIR) $(OBJS_SUBDIR2)
-	$(CC) $(CFLAGS) -lreadline $(LIBFT)libft.a $^ -o $@
+all: $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-
-$(OBJ_DIR)/builtins/%.o: builtins/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/check/%.o: check/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(shell mkdir -p $(OBJ_DIR))
-$(shell mkdir -p $(OBJ_DIR)/builtins)
-$(shell mkdir -p $(OBJ_DIR)/check)
-
-re : clean all
+$(shell mkdir -p $(sort $(dir $(OBJS))))
 
 clean:
-	rm -rf $(OBJ_DIR) $(NAME)
+	@$(MAKE) -C $(LIBFT) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "$(RED) $(BOLD) removed object files $(RESET)"
+
+fclean: clean
+	@$(MAKE) -C $(LIBFT) fclean
+	@rm -f $(NAME)
+	@echo "$(RED) $(BOLD) removed binaries $(RESET)"
+
+re: fclean all
+.PHONY: all libft clean fclean re
