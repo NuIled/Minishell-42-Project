@@ -20,7 +20,7 @@ char *store_line(char *s,char *line)
 		joined = ft_strjoin(s ,line);
 	else
 		joined = ft_strdup(line);
-	
+	free (s);
 	return joined;
 }
 int set_stdin(char **dlmtr,t_cmd *cmd,char *path,int n)

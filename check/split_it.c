@@ -105,3 +105,10 @@ int op_index(char *str)
 	}
 	return (-1);
 }
+
+void freedom(char *s,char **arr ,t_tkn *lst)
+{
+	free(s);
+	free_array(arr);
+	free_tkn_list(lst);
+}

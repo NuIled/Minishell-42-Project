@@ -43,8 +43,8 @@ void	add_to_history(char *line)
 	if (*line && i < (int)ft_strlen(line))
 	{
 		add_history(line);
-		if (check_line(line))
-			parse (line);
+		if (check_line(line))//FIXED ALL LEAKS HERE : POG
+			parse (line);//FIXED ALL LEAKS HERE : POG , and FIXED heredoc leaks too, POG.
 		else
 			free (line);
 	}

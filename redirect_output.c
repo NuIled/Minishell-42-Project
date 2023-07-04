@@ -26,17 +26,18 @@ int	ft_open(int mode, char *filename)
 
 void cut_redirect(int *n,char **path,int *i,char *s)
 {
-	free(*path);
-	*path =NULL;
-	if(s[*i+1]&&s[*i+1]=='>')
+	//free(*path);
+	//*path = NULL;
+	if(s[*i + 1] && s[*i+1] == '>')
 	{
 		*n = 2;
-		*path = word_after_redir(s,*i+1,0);
+		*path = remove_quotes(word_after_redir(s , *i + 1, 0));
 		(*i)++;
 	}
 	else
 	{
 		*n = 1;
-		*path = word_after_redir(s,*i,0);
+		*path = remove_quotes(word_after_redir(s, *i, 0));
 	}
+	printf("path is : %s\n", *path);
 }

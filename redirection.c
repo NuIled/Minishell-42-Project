@@ -23,7 +23,7 @@ int redir_input(char *s,t_cmd *command , char *tmp,int mode)
 	{
 		if(hd->is_open > 0)
 			close(hd->is_open);
-		if(s[hd->i] == '<' && !var_quotes(s,hd->i,0))
+		if(s[hd->i] == '<' && !var_quotes(s, hd->i, 0))
 		{
 			if(is_heredoc(tmp, &hd->heredoc, &hd->i, &hd->path))
 				err = set_stdin(hd->heredoc,command,hd->path,mode);
@@ -56,7 +56,7 @@ int redir_output(char *s,t_cmd *command,char *path,int n)
 		if(s[i]== '>' && !var_quotes(s,i,0))
 		{
 			cut_redirect(&n, &path , &i, s);
-			o = ft_open(n,path);
+			o = ft_open(n, path);
 			if(o < 0)
 			{
 				ft_putstr_fd(path, STDERR_FILENO);

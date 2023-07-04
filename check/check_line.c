@@ -59,23 +59,26 @@ int check_line(char *line)
 {
 	char **arr;
 	t_tkn *lst;
-	char *s = ft_strdup(line);
+	char *s;
+
+	lst = NULL;
+	s = ft_strdup(line);
 	arr = split_it(s);
 	if(!arr)
 	{
 		g_vars->status = SYNTAX_ERR;
 		ft_putstr_fd("minishell : syntax error\n",STDERR_FILENO);
+		freedom(s,arr,lst);
 		return (0);
 	}
 	lst = tkn_it(arr);
 	if(!check_tkns(lst))
 	{
 		g_vars->status = SYNTAX_ERR;
+		freedom(s,arr,lst);
 		ft_putstr_fd("minishell : syntax error\n",STDERR_FILENO);
 		return (0);
 	}
-	free(s);
-	free_array(arr);
-	free_tkn_list(lst);
+	freedom(s,arr,lst);
 	return (1);
 }

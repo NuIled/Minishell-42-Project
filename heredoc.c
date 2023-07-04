@@ -25,6 +25,8 @@ char *word_after_redir(char *s,int i,int rd )
 		k++;
 	while(s[k] && (s[k] == '<' || s[k] == '>') && !var_quotes(s,k,0))
 		k++;
+	while(s[k] && ft_isspace(s[k]))
+		k++;
 	j = k;
 	while(s[j] && !ft_isspace(s[j]))
 		j++;
@@ -39,7 +41,7 @@ char **get_delimiter(char *delimiter)
 		return NULL;
 	arr[0]= delimiter;
 	arr[1] = NULL;
-	return arr;
+	return (arr);
 }
 
 t_heredoc *init_h(void)
@@ -140,7 +142,7 @@ char *heredoc(char **del,t_cmd *cmd,char *s)
 		free(line);
 		free(line_nl);
 	}
-	//free_2d_arr(del);
+	free_array(del);
 	cmd->heredoc = 1;
 	return joined;
 }

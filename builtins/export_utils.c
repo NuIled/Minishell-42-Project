@@ -25,6 +25,7 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+	array = NULL;
 }
 
 char	**sort_env(char **env)

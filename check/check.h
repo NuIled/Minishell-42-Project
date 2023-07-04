@@ -57,4 +57,6 @@ int     wc(char *line);
 int     in_q(char *line , char q,int i);
 int     check_tkns(t_tkn *lst);
 void    free_tkn_list(t_tkn *head);
+void	freedom(char *s,char **arr ,t_tkn *lst);
+
 #endif
