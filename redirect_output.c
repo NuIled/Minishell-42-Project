@@ -39,5 +39,4 @@ void cut_redirect(int *n,char **path,int *i,char *s)
 		*n = 1;
 		*path = remove_quotes(word_after_redir(s, *i, 0));
 	}
-	printf("path is : %s\n", *path);
 }

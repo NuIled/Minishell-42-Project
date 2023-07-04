@@ -222,6 +222,6 @@ void execute(t_cmd *cmd)
     }
     exc_wait(cmd,n);
     update_last_cmd(get_path(cmd->argv[0]));
-    free_cmd_list(cmd);
+    free_cmd_list(head);
     dupping();
 }
