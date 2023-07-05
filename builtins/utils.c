@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:18:27 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:24:18 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 23:01:26 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	update_env(char *var, char *new_value)
 	{
 		if (!ft_strcmp(var, head->var))
 		{
-			free (head->value);
+			free(head->value);
 			head->value = ft_strdup(new_value);
 			free(new_value);
 		}
@@ -51,7 +51,7 @@ void	append_to_env(char *var, char *value)
 		if (!ft_strcmp(var, head->var))
 		{
 			new_value = ft_strjoin(head->value, value);
-			free (head->value);
+			free(head->value);
 			head->value = new_value;
 		}
 		head = head->next;

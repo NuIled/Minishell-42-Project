@@ -6,27 +6,11 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:31:36 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:35:36 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 23:08:22 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	free_array(char **array)
-{
-	size_t	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-	array = NULL;
-}
 
 char	**sort_env(char **env)
 {

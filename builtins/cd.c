@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:05:35 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:12:08 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 22:59:19 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*home(void)
 	return (ft_strdup(home));
 }
 
-static char *oldpwd(void)
+static char	*oldpwd(void)
 {
 	char	*oldpwd;
 
@@ -50,9 +50,9 @@ static char *oldpwd(void)
 	return (ft_strdup(oldpwd));
 }
 
-static void cd_update_env(char *var, char *value)
+static void	cd_update_env(char *var, char *value)
 {
-	if(get_env_value(var))
+	if (get_env_value(var))
 		update_env(var, value);
 	else
 	{
@@ -67,8 +67,8 @@ void	cd(t_cmd *cmd)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	if (!cmd->argv[1] || !ft_strcmp(cmd->argv[1], "~") \
-	|| !ft_strcmp(cmd->argv[1], "--"))
+	if (!cmd->argv[1] || !ft_strcmp(cmd->argv[1], "~") || \
+		!ft_strcmp(cmd->argv[1], "--"))
 		path = home();
 	else if (!ft_strcmp(cmd->argv[1], "-"))
 		path = oldpwd();
@@ -81,7 +81,7 @@ void	cd(t_cmd *cmd)
 		}
 		path = ft_strdup(cmd->argv[1]);
 	}
-	if(!path)
+	if (!path)
 		return ;
 	g_vars->status = 0;
 	cd_update_env("PWD", path);

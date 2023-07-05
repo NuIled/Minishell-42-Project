@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:49:15 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 18:52:17 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:41:17 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	fill_command(char *s, t_cmd *command)
 	err2 = redir_output(tmp, command, NULL, 0);
 	tmp = remove_brackets(tmp);
 	expanded = expand(tmp);
-	//expanded = tmp;
 	if ((err1 == -1 && err2 == -1) || err1 == -2)
 	{
 		fill_err(command);

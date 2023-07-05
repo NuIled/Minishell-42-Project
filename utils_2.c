@@ -6,15 +6,15 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:48:29 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:48:35 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 11:00:35 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_env_list(t_env *env)
+void	free_env_list(t_env *env)
 {
-	t_env *head;
+	t_env	*head;
 
 	while (env)
 	{
@@ -35,4 +35,11 @@ void	ignore_signals(void)
 	sa_sigquit.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa_sigint, NULL);
 	sigaction(SIGQUIT, &sa_sigquit, NULL);
+}
+
+void	cmd_error(t_cmd *command)
+{
+	init_command(command);
+	command->argv = malloc(1);
+	command->argv = NULL;
 }

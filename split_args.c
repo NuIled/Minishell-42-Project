@@ -6,16 +6,19 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:49:05 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:49:09 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:33:29 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int count_args(char *line)
+int	count_args(char *line)
 {
-	int i = 0;
-	int count = 0;
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	while (line[i])
@@ -25,38 +28,40 @@ int count_args(char *line)
 			count++;
 			while (line[i] && !ft_isspace(line[i]))
 				i++;
-			continue;
+			continue ;
 		}
 		i++;
 	}
-	return count;
+	return (count);
 }
 
-int arg_len(char *line)
+int	arg_len(char *line)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!line)
-		return 0;
+		return (0);
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	while (line[i])
 	{
 		if (!var_quotes(line, i, 0) && ft_isspace(line[i]))
-			return i;
+			return (i);
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-char *get_arg(char *line, int *i)
+char	*get_arg(char *line, int *i)
 {
-	char *arg;
-	int j = 0;
-	int k = 0;
+	char	*arg;
+	int		j;
+	int		k;
+
 	arg = malloc(sizeof(char) * (arg_len(line) + 1));
 	if (!arg)
-		return NULL;
+		return (NULL);
 	j = 0;
 	k = 0;
 	while (line[j] && ft_isspace(line[j]))
@@ -64,8 +69,7 @@ char *get_arg(char *line, int *i)
 	while (line[j])
 	{
 		if (!var_quotes(line, j, 0) && ft_isspace(line[j]))
-			break;
-
+			break ;
 		arg[k] = line[j];
 		k++;
 		j++;
@@ -74,29 +78,31 @@ char *get_arg(char *line, int *i)
 	while (line[j] && ft_isspace(line[j]))
 		j++;
 	*i += j;
-	return arg;
+	return (arg);
 }
 
-char **split_line_to_args(char *line)
+char	**split_line_to_args(char *line)
 {
-	int count = 0;
-	int i = 0;
-	int j = 0;
-	char **args;
+	int		count;
+	int		i;
+	int		j;
+	char	**args;
 
+	i = 0;
+	j = 0;
+	count = 0;
 	count = count_args(line);
 	args = malloc(sizeof(char *) * (count + 1));
 	if (!args)
-		return NULL;
+		return (NULL);
 	while (line[i])
 	{
 		args[j] = get_arg(line + i, &i);
 		if (!args[j])
 			return (free_2d_arr(args), NULL);
-
 		j++;
 	}
 	args[j] = NULL;
 	free(line);
-	return args;
+	return (args);
 }

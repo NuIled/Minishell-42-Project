@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:36:04 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:44:11 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 23:06:25 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../minishell.h"
@@ -21,7 +21,7 @@ char	**lst_to_arr_env(t_env *env)
 	i = 0;
 	lst_size = 0;
 	head = env;
-	lst_size = list_size(env) +1;
+	lst_size = list_size(env) + 1;
 	env_arr = malloc(sizeof(char *) * lst_size);
 	if (!env_arr)
 		return (NULL);
@@ -64,7 +64,6 @@ int	is_env_updated(char *var, char *value, int mode)
 	}
 	return (0);
 }
-//free var and value !!!!!!!!
 
 void	export_var_value(char *arg)
 {

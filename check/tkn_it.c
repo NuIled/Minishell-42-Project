@@ -6,13 +6,13 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:46:23 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 20:41:32 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 23:12:53 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check.h"
 
-char	*get_tkn(char *str,int *n)
+char	*get_tkn(char *str, int *n)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,7 @@ char	*get_tkn(char *str,int *n)
 	{
 		j = ft_strlen(&str[i]);
 		*n += j;
-		return (ft_substr(&str[i],0,j));
+		return (ft_substr(&str[i], 0, j));
 	}
 	if (!index)
 	{
@@ -35,7 +35,7 @@ char	*get_tkn(char *str,int *n)
 		return (ft_substr(&str[i], 0, j));
 	}
 	*n += index;
-	return (ft_substr(&str[i],0,index));
+	return (ft_substr(&str[i], 0, index));
 }
 
 int	tkn_type(char *tkn)
@@ -58,7 +58,7 @@ t_tkn	*make_tkn(char *tkn)
 {
 	t_tkn	*node;
 
-	node = ft_calloc(1 ,sizeof(t_tkn));
+	node = ft_calloc(1, sizeof(t_tkn));
 	node->token = tkn;
 	node->type = tkn_type(tkn);
 	node->next = NULL;
@@ -75,7 +75,7 @@ void	add_tkn(t_tkn **head, char *tkn)
 	if (!tmp)
 	{
 		*head = new;
-		return ; 
+		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
@@ -84,22 +84,22 @@ void	add_tkn(t_tkn **head, char *tkn)
 
 t_tkn	*tkn_it(char **arr)
 {
-	int i;
-	int j;
-	char *tkn;
-	t_tkn *lst;
+	int		i;
+	int		j;
+	char	*tkn;
+	t_tkn	*lst;
 
 	i = 0;
 	lst = NULL;
-	while(arr[i])
+	while (arr[i])
 	{
 		j = 0;
 		while (arr[i][j])
 		{
 			tkn = get_tkn(arr[i], &j);
-			add_tkn(&lst,tkn); 
-		}      
+			add_tkn(&lst, tkn);
+		}
 		i++;
 	}
-	return lst;
+	return (lst);
 }

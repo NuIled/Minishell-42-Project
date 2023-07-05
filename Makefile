@@ -20,6 +20,7 @@ PINK	=	\033[35m
 WHITE	=	\033[37m
 BOLD	=	\033[1m
 RESET	=	\033[0m
+
 $(NAME): libft/libft.a $(OBJS)
 	@echo "$(GREEN) $(BOLD) making $(NAME) ... $(RESET)"
 	@$(CC) $(CFLAGS) -Llibft -lft -lreadline $^ -o $@

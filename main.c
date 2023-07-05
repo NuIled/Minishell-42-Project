@@ -6,32 +6,32 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:00:08 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 18:08:20 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:40:04 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <termios.h>
 
-void	hideEndOfFileSignal()
-{
-	struct termios term;
+// void	hideEndOfFileSignal()
+// {
+// 	struct termios term;
 
-	// Get the current terminal settings
-	if (tcgetattr(STDIN_FILENO, &term) == -1) {
-		perror("tcgetattr");
-		exit(1);
-	}
+// 	// Get the current terminal settings
+// 	if (tcgetattr(STDIN_FILENO, &term) == -1) {
+// 		perror("tcgetattr");
+// 		exit(1);
+// 	}
 
-	// Disable the ECHO flag to prevent printing characters
-	term.c_lflag &= (ECHO | ICANON | ISIG);
+// 	// Disable the ECHO flag to prevent printing characters
+// 	term.c_lflag &= (ECHO | ICANON | ISIG);
 
-	// Apply the modified settings
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) == -1) {
-		perror("tcsetattr");
-		exit(1);
-	}
-}
+// 	// Apply the modified settings
+// 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) == -1) {
+// 		perror("tcsetattr");
+// 		exit(1);
+// 	}
+// }
 
 void	add_to_history(char *line)
 {
@@ -43,8 +43,8 @@ void	add_to_history(char *line)
 	if (*line && i < (int)ft_strlen(line))
 	{
 		add_history(line);
-		if (check_line(line))//FIXED ALL LEAKS HERE : POG
-			parse (line);//FIXED ALL LEAKS HERE : POG , and FIXED heredoc leaks too, POG.
+		if (check_line(line))
+			parse (line);
 		else
 			free (line);
 	}

@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:24:39 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:26:54 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:54:05 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	remove_env_node(char *var)
 				prev->next = tmp->next;
 			else
 				g_vars->env = tmp->next;
-			free (tmp->var);
-			free (tmp->value);
-			free (tmp);
+			free(tmp->var);
+			free(tmp->value);
+			free(tmp);
 			return ;
 		}
 		prev = tmp;
@@ -78,4 +78,20 @@ void	unset(t_cmd *cmd)
 		remove_env_node(cmd->argv[i]);
 		i++;
 	}
+}
+
+void	free_array(char **array)
+{
+	size_t	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	array = NULL;
 }

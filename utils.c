@@ -6,29 +6,30 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:48:17 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:48:21 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:28:06 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int consecutive_char_count(char *s,char c)
+int	consecutive_char_count(char *s, char c)
 {
+	int	count;
 
-	int count = 0;
-	if(!s || !c)
-		return 0;
-	while(*s && *s == c)
+	count = 0;
+	if (!s || !c)
+		return (0);
+	while (*s && *s == c)
 	{
 		count++;
 		s++;
 	}
-	return count;
+	return (count);
 }
 
-int ft_strcmp(char *s1,char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	while(*s1 && *s2 && *s1 == *s2)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
 		s1++;
 		s2++;
@@ -36,8 +37,7 @@ int ft_strcmp(char *s1,char *s2)
 	return (*s1 - *s2);
 }
 
-
-char *remove_quotes(char *str)
+char	*remove_quotes(char *str)
 {
 	int		i;
 	int		j;
@@ -48,7 +48,7 @@ char *remove_quotes(char *str)
 	result = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[i])
 	{
-		if ((str[i] == '\'' && !dquotes(str, i))
+		if ((str[i] == '\'' && !dquotes(str, i)) \
 				|| (str[i] == '\"' && !squotes(str, i)))
 		{
 			i++;
@@ -63,21 +63,21 @@ char *remove_quotes(char *str)
 	return (result);
 }
 
-void end_it(void)
+void	end_it(void)
 {
 	free_env_list(g_vars->env);
 	free(g_vars);
-	ft_putstr_fd("exit\n",STDOUT_FILENO);
-	exit(0);
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit (0);
 }
 
-void shlvl(void)
+void	shlvl(void)
 {
-	char *lvl;
+	char	*lvl;
 
 	lvl = get_env_value("SHLVL");
-	if(lvl) 
-		update_env("SHLVL",ft_itoa(ft_atoi(lvl) + 1));
+	if (lvl)
+		update_env("SHLVL", ft_itoa(ft_atoi(lvl) + 1));
 	else
-		add_to_env("SHLVL","1");
+		add_to_env("SHLVL", "1");
 }

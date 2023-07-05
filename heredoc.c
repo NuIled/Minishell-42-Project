@@ -6,71 +6,73 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:51:09 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:51:12 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 10:24:47 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minishell.h"
 
-
-char *word_after_redir(char *s,int i,int rd )
+char	*word_after_redir(char *s, int i, int rd)
 {
-	int j;
-	int k;
+	int	j;
+	int	k;
 
 	k = i + rd;
-	if(!s[k])
-		return NULL;
-	while(s[k] && ft_isspace(s[k]))
+	if (!s[k])
+		return (NULL);
+	while (s[k] && ft_isspace(s[k]))
 		k++;
-	while(s[k] && (s[k] == '<' || s[k] == '>') && !var_quotes(s,k,0))
+	while (s[k] && (s[k] == '<' || s[k] == '>') && !var_quotes(s, k, 0))
 		k++;
-	while(s[k] && ft_isspace(s[k]))
+	while (s[k] && ft_isspace(s[k]))
 		k++;
 	j = k;
-	while(s[j] && !ft_isspace(s[j]))
+	while (s[j] && !ft_isspace(s[j]))
 		j++;
 	return (ft_substr(s, k, j - k));
 }
 
-char **get_delimiter(char *delimiter)
+char	**get_delimiter(char *delimiter)
 {
-	char **arr;
+	char	**arr;
+
 	arr = malloc(sizeof(char *) * 2);
-	if(!arr)
-		return NULL;
-	arr[0]= delimiter;
+	if (!arr)
+		return (NULL);
+	arr[0] = delimiter;
 	arr[1] = NULL;
 	return (arr);
 }
 
-t_heredoc *init_h(void)
+t_heredoc	*init_h(void)
 {
-	t_heredoc *hd = malloc(sizeof(t_heredoc));
-	if(!hd)
-		return (perror("malloc error\n"),NULL);
-	hd->path= NULL;
-	hd->i=-1;
-	hd->heredoc=NULL;
-	hd->temp =NULL;
-	hd->is_open =-1;
-	return hd;
+	t_heredoc	*hd;
+
+	hd = malloc(sizeof(t_heredoc));
+	if (!hd)
+		return (perror("malloc error\n"), NULL);
+	hd->path = NULL;
+	hd->i = -1;
+	hd->heredoc = NULL;
+	hd->temp = NULL;
+	hd->is_open = -1;
+	return (hd);
 }
 
-int is_heredoc(char *s,char ***hd,int *i)
+int	is_heredoc(char *s, char ***hd, int *i)
 {
-	if(s[*i + 1] && s[*i + 1] == '<')
+	if (s[*i + 1] && s[*i + 1] == '<')
 	{
 		*hd = get_delimiter(word_after_redir(s, *i + 1, 1));
 		*i += 2;
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
-int xpnd(char **del)
+int	xpnd(char **del)
 {
-	if(contain_char(*del,'\'') || contain_char(*del ,'\"'))
+	if (contain_char(*del, '\'') || contain_char(*del, '\"'))
 	{
 		*del = remove_quotes(*del);
 		return (0);
@@ -78,32 +80,35 @@ int xpnd(char **del)
 	return (1);
 }
 
-char *heredoc(char **del,t_cmd *cmd)
+char	*heredoc(char **del, t_cmd *cmd)
 {
-	int i;
-	int exp;
-	char *line= NULL;
-	char *line_nl=NULL;
-	char *joined =NULL;
+	int		i;
+	int		exp;
+	char	*line;
+	char	*line_nl;
+	char	*joined;
 
+	line = NULL;
+	line_nl = NULL;
+	joined = NULL;
 	i = 0;
 	exp = xpnd(del);
-	while(del[i])
+	while (del[i])
 	{
 		line = readline("\033[1;35m>\033[0m ");
-		if(!line)
-			break;
-		if(exp && *line)
+		if (!line)
+			break ;
+		if (exp && *line)
 			line = expand(line);
-		line_nl = ft_strjoin(line ,"\n");
-		if(!ft_strcmp(line, del[i]))
+		line_nl = ft_strjoin(line, "\n");
+		if (!ft_strcmp(line, del[i]))
 			i++;
-		if(del[i])
-			joined = store_line(joined,line_nl);
+		if (del[i])
+			joined = store_line(joined, line_nl);
 		free(line);
 		free(line_nl);
 	}
 	free_array(del);
 	cmd->heredoc = 1;
-	return joined;
+	return (joined);
 }

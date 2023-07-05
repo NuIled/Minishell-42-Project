@@ -12,6 +12,7 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include "libft/libft.h"
 # include <stdio.h>
 # include <sys/types.h>
@@ -112,6 +113,7 @@ void		tokenize(char *line, t_cmd *command);
 /*utils_2.c*/
 void		ignore_signals(void);
 void		free_env_list(t_env *env);
+void		cmd_error(t_cmd *command);
 /*env.c*/
 void		free_2d_arr(char **arr);
 t_env		*create_node(char *var, char *val);

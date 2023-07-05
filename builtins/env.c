@@ -6,7 +6,7 @@
 /*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:44:30 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 19:45:42 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/04 23:10:36 by srachdi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	env(void)
 	update_last_cmd(get_path("env"));
 	while (head)
 	{
-		printf ("%s=%s\n", head->var, head->value);
+		printf("%s=%s\n", head->var, head->value);
 		head = head->next;
 	}
 	g_vars->status = 0;
