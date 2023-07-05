@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:37:40 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 18:41:03 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 19:16:21 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	parse(char *line)
 		ft_putstr_fd("malloc failed in parse()\n", STDERR_FILENO);
 	else
 		execute(command);
+	free_cmd(command);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:44:30 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/04 23:10:36 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 19:00:13 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	env(void)
 	t_env	*head;
 
 	head = g_vars->env;
-	update_last_cmd(get_path("env"));
+	char *en = "env";
+	ft_getcmd(&en, get_env_value("PATH"));
+	update_last_cmd(en);
 	while (head)
 	{
-		printf("%s=%s\n", head->var, head->value);
+		printf ("%s=%s\n", head->var, head->value);
 		head = head->next;
 	}
 	g_vars->status = 0;

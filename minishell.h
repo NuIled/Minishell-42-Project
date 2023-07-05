@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:26:27 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 18:36:57 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:56:40 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,4 +198,11 @@ int			count_args(char *line);
 int			arg_len(char *line);
 char		*get_arg(char *line, int *i);
 char		**split_line_to_args(char *line);
+void		execute(t_cmd *cmd);
+void		execute_chiled(int pipefd[2], t_cmd *cmd, char *err);
+void		close_fd(int fd[2]);
+void		ft_getcmd(char **cmd, char *path);
+void		check_fd(t_cmd *cmd, int fd[2]);
+void		ft_error(char *cmd, char *err);
+
 #endif

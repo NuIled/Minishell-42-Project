@@ -13,65 +13,21 @@ int     contain_char(char *s,char c)
     return (0);
 }
 
-char *get_path(char *cmd)
+void	execute_chiled(int pipefd[2], t_cmd *cmd, char *err)
 {
-    char **paths;
-    int i;
-    char *envPath;
-    char *tmp;
-    
-    i = 0;
-    if(contain_char(cmd,'/'))
-        return(ft_strdup(cmd));
-    envPath = get_env_value("PATH"); 
-    if(!envPath)
-        return (NULL);
-    paths = ft_split(envPath,':');
-    if(!paths)
-        return (NULL);
-    while(paths[i])
-    {
-        tmp = str_char_str(paths[i],cmd,'/');
-        if(!access(tmp, X_OK))//0 is good
-        {
-            free_2d_arr(paths);
-            return (tmp);
-        }
-        free(tmp);
-        i++;
-    } 
-    free_2d_arr(paths);
-    return (cmd);
-}
-char *get_path2(char *cmd)
-{
-    char **paths;
-    int i;
-    char *envPath;
-    char *tmp;
-    
-    i = 0;
-    if(contain_char(cmd,'/'))
-        return(ft_strdup(cmd));
-    envPath = get_env_value("PATH"); 
-    if(!envPath)
-        return (NULL);
-    paths = ft_split(envPath,':');
-    if(!paths)
-        return (NULL);
-    while(paths[i])
-    {
-        tmp = str_char_str(paths[i],cmd,'/');
-        if(!access(tmp, X_OK))//0 is good
-        {
-            free_2d_arr(paths);
-            return (tmp);
-        }
-        free(tmp);
-        i++;
-    } 
-    free_2d_arr(paths);
-    return (NULL);
+	if (!cmd->argv[0])
+		exit(0);
+	err = cmd->argv[0];
+	check_fd(cmd, pipefd);
+	dup2(pipefd[1], STDOUT_FILENO);
+	close_fd(pipefd);
+	if (!cmd->next && !cmd->out)
+		dup2(g_vars->out, STDOUT_FILENO);
+	if (is_builtin(cmd->argv[0]))
+		exec_builtin(cmd);
+	ft_getcmd(cmd->argv, get_env_value("PATH"));
+	execve(cmd->argv[0], cmd->argv, lst_to_arr_env(g_vars->env));
+	ft_error(cmd->argv[0], err);
 }
 
 void	 free_cmd(t_cmd *cmd)
@@ -126,8 +82,7 @@ void exec_builtin(t_cmd *cmd)
         unset(cmd);
     else if(!ft_strcmp(cmd->argv[0],"env"))
         env();
-    else if(!ft_strcmp(cmd->argv[0],"exit"))
-        ft_exit(cmd);
+    exit(g_vars->status);
 }
 
 void update_last_cmd(char *last_cmd)
