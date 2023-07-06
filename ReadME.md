@@ -1,4 +1,4 @@
-#Minishell Readme
+# Minishell Readme
 
 Minishell is a shell program written in C that provides a basic command-line interface with various features. The goal of this project is to create a functional shell program that can interpret and execute user commands, handle redirections, implement pipes, expand environment variables, and support built-in shell commands.
 
