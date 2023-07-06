@@ -11,7 +11,7 @@ git clone https://github.com/NuIled/FINALMinishell.git
 Prerequisites
 Minishell has the following prerequisites:
 
-#GNU readline library
+## GNU readline library
 To install the readline library on Ubuntu, you can use the following command:
 
 bash
@@ -25,7 +25,7 @@ Copy code
 make
 This will compile the source files and generate the minishell executable.
 
-#Usage
+## Usage
 To run Minishell, use the following command:
 
 bash
@@ -33,7 +33,7 @@ Copy code
 ./minishell
 Once the shell is running, you can enter commands and interact with the shell.
 
-#Features
+## Features
 Minishell provides the following features:
 
 Prompt: Minishell displays a prompt to indicate that it's ready to accept user commands.
