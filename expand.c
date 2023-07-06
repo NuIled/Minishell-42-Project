@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:18:28 by srachdi           #+#    #+#             */
-/*   Updated: 2023/06/25 18:24:52 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/06 05:15:16 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ char	*expand(char *s)
 			var = copy_value(s, value, i);
 			if (more_vars(var))
 				var = expand(var);
+			free(value);
 			return (var);
 		}
 		i++;

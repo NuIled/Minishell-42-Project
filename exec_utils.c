@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:47:32 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/07/06 03:49:42 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 05:01:09 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	free_cmd(t_cmd *cmd)
 	while (cmd)
 	{
 		tmp = cmd;
-		cmd = cmd->next;
 		free_2d_arr(tmp->argv);
 		if (tmp->in)
 			free(tmp->in);
 		if (tmp->out)
 			free(tmp->out);
+		cmd = cmd->next;
 		free(tmp);
 	}
 }
