@@ -3,34 +3,35 @@
 Minishell is a shell program written in C that provides a basic command-line interface with various features. The goal of this project is to create a functional shell program that can interpret and execute user commands, handle redirections, implement pipes, expand environment variables, and support built-in shell commands.
 
 #Getting Started
-To get started with Minishell, you can clone the repository from GitHub:
 
-bash
-Copy code
+To get started with Minishell, you can clone the repository from GitHub:
+ 
 git clone https://github.com/NuIled/FINALMinishell.git
+
 Prerequisites
+
 Minishell has the following prerequisites:
 
 ## GNU readline library
+
 To install the readline library on Ubuntu, you can use the following command:
 
-bash
-Copy code
 sudo apt-get install libreadline-dev
-Building Minishell
-To build Minishell, navigate to the project directory and run the following command:
 
-bash
-Copy code
+Building Minishell
+
+To build Minishell, navigate to the project directory and run the following command:
+ 
 make
+
 This will compile the source files and generate the minishell executable.
 
 ## Usage
+
 To run Minishell, use the following command:
 
-bash
-Copy code
 ./minishell
+
 Once the shell is running, you can enter commands and interact with the shell.
 
 ## Features
