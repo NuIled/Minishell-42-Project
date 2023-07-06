@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:55:26 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/07/05 19:32:24 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 03:46:11 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@ void	ft_getcmd(char **cmd, char *path)
 {
 	char	*command;
 	char	**pathsplited;
+	int		i;
 
 	command = *cmd;
-	pathsplited = ft_split(path, ':');
-	if (strrchr(*cmd, '/'))
+	i = 0;
+	if (*cmd && strrchr(*cmd, '/'))
 		return ;
-	while (*pathsplited)
+	pathsplited = ft_split(path, ':');
+	while (pathsplited[i])
 	{
-		path = ft_strjoin(*pathsplited, "/");
+		path = ft_strjoin(pathsplited[i], "/");
 		*cmd = ft_strjoin(path, command);
+		free(path);
 		if (!access(*cmd, X_OK))
-		{	
-			free(path);
+		{
 			free(command);
-			free(pathsplited);
+			free_2d_arr(pathsplited);
 			return ;
 		}
-		pathsplited++;
-		free(*pathsplited);
+		free(*cmd);
+		i++;
 	}
-			free(path);
-			free(command);
-	//free_2d_arr(pathsplited);
+	free_2d_arr(pathsplited);
 }
 
 void	close_fd(int fd[2])
@@ -78,46 +78,41 @@ void	ft_error(char *cmd, char *err)
 	if (cmd && errno != 13)
 	{
 		printf("minishell %s: command not found\n", err);
-		g_vars->status = 127;
-		return ;
+		exit(127);
 	}
 	else if (errno == 13)
 	{
 		printf("minishell %s: Permission denied \n", err);
-		g_vars->status = 126;
-		return ;
+		exit(126);
 	}
 	else
 		printf("minishell %s: %s \n", err, (char *)(strerror(errno)));
-	g_vars->status = errno;
+	exit(errno);
 }
 
 void	execute(t_cmd *cmd)
 {
 	int		pipefd[2];
 	int		pid;
-	char	*err = 0;
+	char	*err;
+	int		status;
 
+	err = 0;
 	while (cmd)
 	{
 		if (cmd->argv[0] && !ft_strncmp(cmd->argv[0], "exit", 4))
 			ft_exit(cmd);
 		pipe(pipefd);
 		pid = fork();
+		close_fd(pipefd);
 		if (pid < 0)
 			exit(EXIT_FAILURE);
 		if (pid == 0)
 			execute_chiled(pipefd, cmd, err);
 		dup2(pipefd[0], 0);
 		close_fd(pipefd);
-		wait(&g_vars->status);
-		if (g_vars->status == 2)
-			g_vars->status += 128;
-		if (g_vars->status == 0)
-			{
-				ft_getcmd(cmd->argv, get_env_value("PATH"));
-				update_last_cmd(ft_strdup(cmd->argv[0]));
-			}
+		waitpid(pid, &status, 0);
+		check_exit_status(status, cmd);
 		cmd = cmd->next;
 	}
 	dup2(g_vars->out, STDOUT_FILENO);

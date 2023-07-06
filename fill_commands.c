@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:49:15 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/05 10:41:17 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/06 01:31:12 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	fill_command(char *s, t_cmd *command)
 	int		err1;
 	int		err2;
 
-	tmp = skip_space(ft_strdup(s));
-	free (s);
+	tmp = skip_space(s);
 	err1 = redir_input(tmp, command, tmp, 0);
 	err2 = redir_output(tmp, command, NULL, 0);
 	tmp = remove_brackets(tmp);

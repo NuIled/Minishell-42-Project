@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/06 03:47:32 by aoutifra          #+#    #+#             */
+/*   Updated: 2023/07/06 03:49:42 by aoutifra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int     contain_char(char *s,char c)
+int	contain_char(char *s, char c)
 {
-    if(!s)
-        return (0);
-    while(*s)
-    {
-        if(*s == c)
-            return (1);
-        s++;
-    }
-    return (0);
+	if (!s)
+		return (0);
+	while (*s)
+	{
+		if (*s == c)
+			return (1);
+		s++;
+	}
+	return (0);
 }
 
 void	execute_chiled(int pipefd[2], t_cmd *cmd, char *err)
@@ -30,7 +42,7 @@ void	execute_chiled(int pipefd[2], t_cmd *cmd, char *err)
 	ft_error(cmd->argv[0], err);
 }
 
-void	 free_cmd(t_cmd *cmd)
+void	free_cmd(t_cmd *cmd)
 {
 	t_cmd	*tmp;
 
@@ -47,50 +59,40 @@ void	 free_cmd(t_cmd *cmd)
 	}
 }
 
-int is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
-    if(!cmd)
-        return 0;
-    if(!ft_strcmp(cmd,"echo"))
-        return (1);
-    else if(!ft_strcmp(cmd,"cd"))
-        return (1);
-    else if(!ft_strcmp(cmd,"pwd"))
-        return (1);
-    else if(!ft_strcmp(cmd,"export"))
-        return (1);
-    else if(!ft_strcmp(cmd,"unset"))
-        return (1);
-    else if(!ft_strcmp(cmd,"env"))
-        return (1);
-    else if(!ft_strcmp(cmd,"exit"))
-        return (1);
-    return 0;
+	if (!cmd)
+		return (0);
+	if (!ft_strcmp(cmd, "echo"))
+		return (1);
+	else if (!ft_strcmp(cmd, "cd"))
+		return (1);
+	else if (!ft_strcmp(cmd, "pwd"))
+		return (1);
+	else if (!ft_strcmp(cmd, "export"))
+		return (1);
+	else if (!ft_strcmp(cmd, "unset"))
+		return (1);
+	else if (!ft_strcmp(cmd, "env"))
+		return (1);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (1);
+	return (0);
 }
 
-void exec_builtin(t_cmd *cmd)
+void	exec_builtin(t_cmd *cmd)
 {
-    if(!ft_strcmp(cmd->argv[0],"echo"))
-        echo(cmd);
-    else if(!ft_strcmp(cmd->argv[0],"cd"))
-        cd(cmd);
-    else if(!ft_strcmp(cmd->argv[0],"pwd"))
-        pwd();
-    else if(!ft_strcmp(cmd->argv[0],"export"))
-        export(cmd);
-    else if(!ft_strcmp(cmd->argv[0],"unset"))
-        unset(cmd);
-    else if(!ft_strcmp(cmd->argv[0],"env"))
-        env();
-    exit(g_vars->status);
-}
-
-void update_last_cmd(char *last_cmd)
-{
-    if(last_cmd && *last_cmd && !access(last_cmd, X_OK))
-    {
-        remove_env_node("_");
-        add_to_env("_",last_cmd);
-        free(last_cmd);
-    }
+	if (!ft_strcmp(cmd->argv[0], "echo"))
+		echo(cmd);
+	else if (!ft_strcmp(cmd->argv[0], "cd"))
+		cd(cmd);
+	else if (!ft_strcmp(cmd->argv[0], "pwd"))
+		pwd();
+	else if (!ft_strcmp(cmd->argv[0], "export"))
+		export(cmd);
+	else if (!ft_strcmp(cmd->argv[0], "unset"))
+		unset(cmd);
+	else if (!ft_strcmp(cmd->argv[0], "env"))
+		env();
+	exit(g_vars->status);
 }

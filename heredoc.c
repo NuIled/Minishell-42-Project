@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srachdi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:51:09 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/05 10:24:47 by srachdi          ###   ########.fr       */
+/*   Updated: 2023/07/06 03:54:19 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,6 @@ int	is_heredoc(char *s, char ***hd, int *i)
 		return (1);
 	}
 	return (0);
-}
-
-int	xpnd(char **del)
-{
-	if (contain_char(*del, '\'') || contain_char(*del, '\"'))
-	{
-		*del = remove_quotes(*del);
-		return (0);
-	}
-	return (1);
 }
 
 char	*heredoc(char **del, t_cmd *cmd)

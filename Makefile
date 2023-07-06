@@ -4,7 +4,7 @@ CC := cc
 CFLAGS := -Wall -Werror -Wextra #-fsanitize=address
 LIBFT := libft/
 INC := minishell.h check/check.h
-SRCS := main.c env.c exec_utils.c execute.c expand.c expand_utils.c\
+SRCS := main.c env.c exec_utils1.c exec_utils.c execute.c expand.c expand_utils.c\
 	fill_command_utils.c fill_commands.c heredoc.c\
 	parse.c parse_utils.c redirect_input.c redirect_output.c\
 	redirection.c remove_brackets.c signals.c\
