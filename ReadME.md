@@ -1,7 +1,40 @@
 Minishell Readme
 Minishell is a shell program written in C that provides a basic command-line interface with various features. The goal of this project is to create a functional shell program that can interpret and execute user commands, handle redirections, implement pipes, expand environment variables, and support built-in shell commands.
 
+Getting Started
+To get started with Minishell, you can clone the repository from GitHub:
+
+bash
+Copy code
+git clone https://github.com/NuIled/FINALMinishell.git
+Prerequisites
+Minishell has the following prerequisites:
+
+GNU readline library
+To install the readline library on Ubuntu, you can use the following command:
+
+bash
+Copy code
+sudo apt-get install libreadline-dev
+Building Minishell
+To build Minishell, navigate to the project directory and run the following command:
+
+bash
+Copy code
+make
+This will compile the source files and generate the minishell executable.
+
+Usage
+To run Minishell, use the following command:
+
+bash
+Copy code
+./minishell
+Once the shell is running, you can enter commands and interact with the shell.
+
 Features
+Minishell provides the following features:
+
 Prompt: Minishell displays a prompt to indicate that it's ready to accept user commands.
 History: Minishell keeps track of the command history, allowing users to navigate and execute previously entered commands.
 Command Execution: The shell searches for and launches the appropriate executable based on the PATH variable or using a relative or absolute path.
@@ -14,66 +47,6 @@ Environment Variables: Minishell handles environment variables ($ followed by a 
 Exit Status: Minishell expands $? to the exit status of the most recently executed foreground pipeline.
 Signal Handling: The shell handles ctrl-C, ctrl-D, and ctrl-\ signals, replicating their behavior in the bash shell.
 Built-in Commands: Minishell provides several built-in commands, including echo, cd, pwd, export, unset, env, and exit.
-Usage
-Clone the repository: git clone <repository_url>
-Compile the project using the provided Makefile: make
-Run the Minishell program: ./minishell
-Dependencies
-The following external functions and libraries are used in Minishell:
-
-readline
-rl_clear_history
-rl_on_new_line
-rl_replace_line
-rl_redisplay
-add_history
-printf
-malloc
-free
-write
-access
-open
-read
-close
-fork
-wait
-waitpid
-wait3
-wait4
-signal
-sigaction
-sigemptyset
-sigaddset
-kill
-exit
-getcwd
-chdir
-stat
-lstat
-fstat
-unlink
-execve
-dup
-dup2
-pipe
-opendir
-readdir
-closedir
-strerror
-perror
-isatty
-ttyname
-ttyslot
-ioctl
-getenv
-tcsetattr
-tcgetattr
-tgetent
-tgetflag
-tgetnum
-tgetstr
-tgoto
-tputs
 Makefile
 The provided Makefile contains the following rules:
 
@@ -83,5 +56,8 @@ clean: Removes object files generated during compilation.
 fclean: Removes the Minishell executable and object files.
 re: Executes fclean and then all to rebuild the project.
 bonus: Additional rule to handle bonus headers, libraries, or functions (if applicable).
-Norm and Memory Management
-Minishell must adhere to the Norm guidelines. Ensure that your code is written in accordance with the
+Acknowledgments
+This project was developed as part of the curriculum at [Your School Name]. Special thanks to the instructors and staff who provided guidance and support.
+
+License
+This project is licensed under the MIT License. Feel free to modify and distribute it according to your needs.
