@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:55:26 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/07/06 03:46:11 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 04:03:43 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	execute(t_cmd *cmd)
 			ft_exit(cmd);
 		pipe(pipefd);
 		pid = fork();
-		close_fd(pipefd);
 		if (pid < 0)
 			exit(EXIT_FAILURE);
 		if (pid == 0)

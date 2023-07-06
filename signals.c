@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:49:26 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/06 03:55:35 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 04:02:48 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	signal_handler(int signal)
 	(void)signal;
 	ft_putstr_fd("\nminishell> ", STDOUT_FILENO);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 	g_vars->status = 1;
 }
