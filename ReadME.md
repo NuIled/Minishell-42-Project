@@ -1,38 +1,40 @@
-Minishell Readme
+# Minishell Readme
+
 Minishell is a shell program written in C that provides a basic command-line interface with various features. The goal of this project is to create a functional shell program that can interpret and execute user commands, handle redirections, implement pipes, expand environment variables, and support built-in shell commands.
 
-Getting Started
-To get started with Minishell, you can clone the repository from GitHub:
+#Getting Started
 
-bash
-Copy code
+To get started with Minishell, you can clone the repository from GitHub:
+ 
 git clone https://github.com/NuIled/FINALMinishell.git
+
 Prerequisites
+
 Minishell has the following prerequisites:
 
-GNU readline library
+## GNU readline library
+
 To install the readline library on Ubuntu, you can use the following command:
 
-bash
-Copy code
 sudo apt-get install libreadline-dev
-Building Minishell
-To build Minishell, navigate to the project directory and run the following command:
 
-bash
-Copy code
+Building Minishell
+
+To build Minishell, navigate to the project directory and run the following command:
+ 
 make
+
 This will compile the source files and generate the minishell executable.
 
-Usage
+## Usage
+
 To run Minishell, use the following command:
 
-bash
-Copy code
 ./minishell
+
 Once the shell is running, you can enter commands and interact with the shell.
 
-Features
+## Features
 Minishell provides the following features:
 
 Prompt: Minishell displays a prompt to indicate that it's ready to accept user commands.
@@ -57,7 +59,4 @@ fclean: Removes the Minishell executable and object files.
 re: Executes fclean and then all to rebuild the project.
 bonus: Additional rule to handle bonus headers, libraries, or functions (if applicable).
 Acknowledgments
-This project was developed as part of the curriculum at [Your School Name]. Special thanks to the instructors and staff who provided guidance and support.
-
-License
-This project is licensed under the MIT License. Feel free to modify and distribute it according to your needs.
+This project was developed as part of the curriculum at 1337.
