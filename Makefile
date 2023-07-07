@@ -22,13 +22,13 @@ BOLD	=	\033[1m
 RESET	=	\033[0m
 
 $(NAME): libft/libft.a $(OBJS)
-	@echo "$(GREEN) $(BOLD) making $(NAME) ... $(RESET)"
-	@$(CC) $(CFLAGS) -Llibft -lft -lreadline $^ -o $@
+	@echo "$(GREEN) $(BOLD) making $(NAME) ... $(RESET)"]
+	@$(CC) $(CFLAGS) -Llibft -lft -L/Users/aoutifra/.brew/opt/readline/lib -lreadline -I/Users/aoutifra/.brew/opt/readline/include $^ -o $@
 	@echo "$(PINK) $(BOLD) $(NAME) is ready $(RESET)"
 
 $(OBJ_DIR)/%.o: %.c $(INC)
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I/Users/aoutifra/.brew/opt/readline/include
 
 libft/libft.a:
 	@echo "$(WHITE) $(BOLD) making libft ... $(RESET)"

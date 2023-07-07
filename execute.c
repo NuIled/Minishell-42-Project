@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 21:55:26 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/07/06 05:01:05 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 20:19:39 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	execute(t_cmd *cmd)
 		dup2(pipefd[0], 0);
 		close_fd(pipefd);
 		waitpid(pid, &status, 0);
-		check_exit_status(status, cmd);
+		check_exit_status(&status, cmd);
 		cmd = cmd->next;
 	}
 	dup2(g_vars->out, STDOUT_FILENO);

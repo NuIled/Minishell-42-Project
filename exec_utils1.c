@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:50:26 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/07/06 04:20:34 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 20:20:46 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	update_last_cmd(char *last_cmd)
 	free(last_cmd);
 }
 
-void	check_exit_status(int status, t_cmd *cmd)
+void	check_exit_status(int *status, t_cmd *cmd)
 {
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 2)
-		g_vars->status = WEXITSTATUS(status);
+	if (WIFEXITED(*status) && WEXITSTATUS(*status) != 2)
+		g_vars->status = WEXITSTATUS(*status);
 	else
 		g_vars->status = 130;
 	if (g_vars->status == 0)

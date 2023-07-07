@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:18:28 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/06 05:15:16 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/06 20:47:44 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*extract_var(char *s, int index)
 	{
 		var[j] = s[i];
 		j++;
-		if (s[j] == '?')
+		if (s[j] == '?' || !(valid_env_var(s[i])))
 			break ;
 		i++;
 	}
@@ -111,25 +111,34 @@ int	closed_sq(char *line, int index)
 char	*expand(char *s)
 {
 	int		i;
+	int		flag;
 	char	*var;
 	char	*value;
 
+	flag = 0;
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == '$' && s[i + 1] && closed_sq(s, i) \
-				&& (valid_env_var(s[i + 1]) || s[i + 1] == '?'))
+				&& (valid_env_var(s[i + 1]) || s[i + 1] == '?' || s[i + 1] == '@'))
 		{
 			var = extract_var(s, i);
 			if (!ft_strcmp(var, "?"))
+			{
 				value = ft_itoa(g_vars->status);
+				flag++;
+			}
 			else
 				value = get_env_value(var);
 			free(var);
 			var = copy_value(s, value, i);
+			if(flag)
+			{
+				free(value);
+				flag--;
+			}
 			if (more_vars(var))
 				var = expand(var);
-			free(value);
 			return (var);
 		}
 		i++;

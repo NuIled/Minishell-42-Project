@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 18:26:27 by srachdi           #+#    #+#             */
-/*   Updated: 2023/07/06 04:02:39 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/07/07 01:33:00 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ void		ft_getcmd(char **cmd, char *path);
 void		check_fd(t_cmd *cmd, int fd[2]);
 void		ft_error(char *cmd, char *err);
 void		update_last_cmd(char *last_cmd);
-void		check_exit_status(int status, t_cmd *cmd);
+void		check_exit_status(int *status, t_cmd *cmd);
 int			xpnd(char **del);
 
 #endif
